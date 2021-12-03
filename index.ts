@@ -29,7 +29,7 @@ class GeneratePkgJsonPlugin {
           const { Compilation } = webpack;
           const { RawSource } = webpack.sources;
 
-          // webpakc4静态资源生成方法
+          // webpack4静态资源生成方法
           compilation.emitAsset(
             `${this.options.ouputFile || "package"}.json`,
             new RawSource(str)
@@ -37,8 +37,10 @@ class GeneratePkgJsonPlugin {
 
           // webpack4
         } else {
-          // webpakc5静态资源生成方法
-          (compilation as any).assets["package.json"] = {
+          // webpack5静态资源生成方法
+          (compilation as any).assets[
+            `${this.options.ouputFile || "package"}.json`
+          ] = {
             source: function () {
               return str;
             },

@@ -31,12 +31,12 @@ class GeneratePkgJsonPlugin {
         } = webpack;
         const {
           RawSource
-        } = webpack.sources; // webpakc4静态资源生成方法
+        } = webpack.sources; // webpack4静态资源生成方法
 
         compilation.emitAsset(`${this.options.ouputFile || "package"}.json`, new RawSource(str)); // webpack4
       } else {
         // webpakc5静态资源生成方法
-        compilation.assets["package.json"] = {
+        compilation.assets[`${this.options.ouputFile || "package"}.json`] = {
           source: function () {
             return str;
           },

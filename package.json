@@ -6,8 +6,9 @@
   "scripts": {
     "build": "npm run build.compile && npm run build.types",
     "build.compile": "cross-env NODE_ENV=production babel index.ts -d libs --verbose --extensions .ts --ignore */**/*.d.ts",
-    "build.types": "cross-env NODE_ENV=proed\" && exit 1",
-    "build_test": "webpack --config build/webpack.test.js --mode=production",
+    "build.types": "cross-env NODE_ENV=production tsc --project tsconfig.types.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build_test": "npm run build && webpack --config build/webpack.test.js --mode=production",
     "debug": "node node_modules/webpack/bin/webpack.js --config build/webpack.test.js --mode=production"
   },
   "author": "",
@@ -20,8 +21,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
-    "@types/node": "^16.11.11",duction tsc --project tsconfig.types.json",
-    "test": "echo \"Error: no test specifi
+    "@types/node": "^16.11.11",
     "@types/read-pkg-up": "^6.0.0",
     "@types/webpack": "^5.28.0",
     "cross-env": "^7.0.3",
