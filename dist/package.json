@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build.compile && npm run build.types",
+    "build.compile": "cross-env NODE_ENV=production babel index.ts -d dist --verbose --extensions .ts --ignore */**/*.d.ts ",
+    "build.types": "cross-env NODE_ENV=production tsc --project tsconfig.types.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=production"
+    "build_test": "webpack --config build/webpack.test.js --mode=production",
+    "debug": "node node_modules/webpack/bin/webpack.js --config build/webpack.test.js --mode=production"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +17,22 @@
     "schema-utils": "^4.0.0"
   },
   "devDependencies": {
-    "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.1"
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/node": "^16.11.11",
+    "@types/read-pkg-up": "^6.0.0",
+    "@types/webpack": "^5.28.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.3.0",
+    "read-pkg-up": "6.0.0",
+    "typescript": "^4.5.2",
+    "webpack": "4.46.0",
+    "webpack-cli": "3.3.12"
   },
-  "buildTime": "2021/12/2 下午5:45:20"
+  "peerDependencies": {
+    "webpack": ">=4.0.0 <6.0.0"
+  },
+  "buildTime": "2021/12/3 下午8:25:23"
 }

@@ -1,4 +1,4 @@
-const GeneratePkgJsonPlugin = require('../index.js')
+const GeneratePkgJsonPlugin = require('../dist/index')
 module.exports = {
   output: {
     filename: 'main.js'
