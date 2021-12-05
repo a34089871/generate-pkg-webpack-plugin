@@ -1,5 +1,5 @@
 import path from 'path'
-import readPkgUp from 'read-pkg-up';
+const readPkgUp = require('read-pkg-up');
 
 export const getWebpackVersion = () => {
     const webpackPath = require.resolve('webpack');

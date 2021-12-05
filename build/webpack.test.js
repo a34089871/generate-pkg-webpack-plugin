@@ -1,4 +1,4 @@
-const GeneratePkgJsonPlugin = require('../libs/index')
+const GeneratePkgJsonPlugin = require('../libs/generate-pkgjson.webpack.plugin')
 module.exports = {
   output: {
     filename: 'main.js'

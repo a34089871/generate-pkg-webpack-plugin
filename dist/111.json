@@ -9,7 +9,8 @@
     "build.types": "cross-env NODE_ENV=production tsc --project tsconfig.types.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build_test": "webpack --config build/webpack.test.js --mode=production",
-    "debug": "node node_modules/webpack/bin/webpack.js --config build/webpack.test.js --mode=production"
+    "debug": "node node_modules/webpack/bin/webpack.js --config build/webpack.test.js --mode=production",
+    "rollup-build": "rollup -cw"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +22,17 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/node": "^16.11.11",
     "@types/read-pkg-up": "^6.0.0",
     "@types/webpack": "^5.28.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.3.0",
     "read-pkg-up": "6.0.0",
+    "rollup": "^2.60.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.5.2",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1"
@@ -34,5 +40,5 @@
   "peerDependencies": {
     "webpack": ">=4.0.0 <6.0.0"
   },
-  "buildTime": "2021/12/5 下午10:50:12"
+  "buildTime": "2021/12/5 下午11:10:13"
 }
