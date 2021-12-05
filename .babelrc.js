@@ -1,6 +1,6 @@
 'use strict';
 
-const nodeVersion = require('./src/utils/node-version');
+const nodeVersion = require('./utils/node-version');
 
 const babel = {
     presets: [

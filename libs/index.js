@@ -2,13 +2,18 @@
 
 var _fs = _interopRequireDefault(require("fs"));
 
+var _getWebpackVersion = require("./get-webpack-version");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const cwd = process.cwd(); // import {getWebpackVersion} from "./src/utils/get-webpack-version";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+const cwd = process.cwd();
 
 class GeneratePkgJsonPlugin {
-  // private version: string = getWebpackVersion();
   constructor(options = {}) {
+    _defineProperty(this, "version", parseInt((0, _getWebpackVersion.getWebpackVersion)()));
+
     this.options = options;
   }
 
@@ -17,33 +22,42 @@ class GeneratePkgJsonPlugin {
     // 并且可以保证 webpack 版本正确
     const {
       webpack
-    } = compiler; // console.log(this.version);
-
+    } = compiler;
     const str = this.handlePkgJson();
     /** compiler.hooks.<hoonkName>.tap/tapAsync/tapPromise */
 
     compiler.hooks.compilation.tap("GeneratePkgJsonPlugin", compilation => {
-      // webpack5
-      if (webpack) {
-        // 获取 Compilation 后续会用到 Compilation 提供的 stage
-        const {
-          Compilation
-        } = webpack;
-        const {
-          RawSource
-        } = webpack.sources; // webpack4静态资源生成方法
+      console.log(this.version > 4);
 
-        compilation.emitAsset(`${this.options.ouputFile || "package"}.json`, new RawSource(str)); // webpack4
-      } else {
-        // webpakc5静态资源生成方法
-        compilation.assets[`${this.options.ouputFile || "package"}.json`] = {
-          source: function () {
-            return str;
-          },
-          size: function () {
-            return 19;
-          }
-        };
+      switch (this.version) {
+        // webpack4
+        case 4:
+          // webpack4静态资源生成方法
+          compilation.assets[`${this.options.ouputFile || "package"}.json`] = {
+            source: function () {
+              return str;
+            },
+            size: function () {
+              return 19;
+            }
+          };
+          break;
+        // webpack5
+
+        case 5:
+          // 获取 Compilation 后续会用到 Compilation 提供的 stage
+          const {
+            Compilation
+          } = webpack;
+          const {
+            RawSource
+          } = webpack.sources; // webpack5静态资源生成方法
+
+          compilation.emitAsset(`${this.options.ouputFile || "package"}.json`, new RawSource(str));
+          break;
+
+        default:
+          console.error('暂不支持此版本webpack，请使用webpack4/5！');
       }
     });
   }

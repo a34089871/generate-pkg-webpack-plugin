@@ -21,6 +21,6 @@
         "skipLibCheck": true,
         "resolveJsonModule": true
     },
-    "include": ["src", "index.ts"],
+    "include": ["src", "index.ts", "utils", "interface"],
     "exclude": ["dist", "node_modules", "dev-utils"]
 }
