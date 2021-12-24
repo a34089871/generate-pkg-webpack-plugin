@@ -1,16 +1,12 @@
-// @ts-ignore
-
-'use strict';
-
-const path = require('path');
+import path from 'path'
 const readPkgUp = require('read-pkg-up');
 
 export const getWebpackVersion = () => {
     const webpackPath = require.resolve('webpack');
     const { dir } = path.parse(webpackPath);
 
-    const webpackPackageJson = readPkgUp.sync({ cwd: dir, normalize: false });
-    const version = webpackPackageJson.package.version
+    const webpackPackageJson: any = readPkgUp.sync({ cwd: dir, normalize: false });
+    const version: string = webpackPackageJson.package.version
         ? webpackPackageJson.package.version
         : null;
 

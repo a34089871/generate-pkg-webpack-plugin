@@ -8,7 +8,7 @@ export interface Options {
 }
 
 class GeneratePkgJsonPlugin {
-  private version: string = getWebpackVersion();
+  private version: number = parseInt(getWebpackVersion());
   private options: Options;
   constructor(options: Options = {}) {
     this.options = options;
