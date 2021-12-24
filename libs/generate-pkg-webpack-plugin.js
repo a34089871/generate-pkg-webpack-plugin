@@ -2,13 +2,18 @@
 
 var _fs = _interopRequireDefault(require("fs"));
 
+var _getWebpackVersion = require("./get-webpack-version");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const cwd = process.cwd(); // import {getWebpackVersion} from "./src/utils/get-webpack-version";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+const cwd = process.cwd();
 
 class GeneratePkgJsonPlugin {
-  // private version: string = getWebpackVersion();
   constructor(options = {}) {
+    _defineProperty(this, "version", (0, _getWebpackVersion.getWebpackVersion)());
+
     this.options = options;
   }
 
@@ -17,7 +22,8 @@ class GeneratePkgJsonPlugin {
     // 并且可以保证 webpack 版本正确
     const {
       webpack
-    } = compiler; // console.log(this.version);
+    } = compiler;
+    console.log(this.version); // console.log(getWebpackVersion());
 
     const str = this.handlePkgJson();
     /** compiler.hooks.<hoonkName>.tap/tapAsync/tapPromise */
@@ -35,7 +41,7 @@ class GeneratePkgJsonPlugin {
 
         compilation.emitAsset(`${this.options.ouputFile || "package"}.json`, new RawSource(str)); // webpack4
       } else {
-        // webpakc5静态资源生成方法
+        // webpack5静态资源生成方法
         compilation.assets[`${this.options.ouputFile || "package"}.json`] = {
           source: function () {
             return str;

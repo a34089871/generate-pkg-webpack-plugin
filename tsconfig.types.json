@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig",
     "compilerOptions": {
-        "outDir": "dist",
+        "outDir": "libs/types",
         "declaration": true,
         "declarationMap": true,
         "isolatedModules": false,

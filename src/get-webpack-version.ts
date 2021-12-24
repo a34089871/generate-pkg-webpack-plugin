@@ -10,7 +10,6 @@ export const getWebpackVersion = () => {
     const { dir } = path.parse(webpackPath);
 
     const webpackPackageJson = readPkgUp.sync({ cwd: dir, normalize: false });
-    console.log(webpackPackageJson)
     const version = webpackPackageJson.package.version
         ? webpackPackageJson.package.version
         : null;

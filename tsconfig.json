@@ -19,8 +19,11 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "typeRoots": [
+            "./node_modules/@types/"
+        ]
     },
-    "include": ["src", "index.ts"],
-    "exclude": ["dist", "node_modules", "dev-utils"]
+    "include": ["src", "src/generate-pkg-webpack-plugin.ts", "utils"],
+    "exclude": ["dist", "node_modules", "libs"]
 }

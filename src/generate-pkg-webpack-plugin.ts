@@ -1,12 +1,14 @@
 import fs  from 'fs'
 const cwd = process.cwd()
-// import {getWebpackVersion} from "./src/utils/get-webpack-version";
+import {getWebpackVersion} from "./get-webpack-version";
 
 import { Compilation, Compiler, Stats } from 'webpack';
-import { Options } from './src/interface/index'
+export interface Options {
+  ouputFile?: string;
+}
 
 class GeneratePkgJsonPlugin {
-  // private version: string = getWebpackVersion();
+  private version: string = getWebpackVersion();
   private options: Options;
   constructor(options: Options = {}) {
     this.options = options;
@@ -16,7 +18,8 @@ class GeneratePkgJsonPlugin {
     // 可以从编译器对象访问 webpack 模块实例
     // 并且可以保证 webpack 版本正确
     const { webpack } = compiler;
-    // console.log(this.version);
+    console.log(this.version);
+    // console.log(getWebpackVersion());
     const str = this.handlePkgJson();
 
     /** compiler.hooks.<hoonkName>.tap/tapAsync/tapPromise */

@@ -16,4 +16,4 @@ function getNodeVersion() {
 
 const nodeVersion = getNodeVersion();
 
-module.exports = nodeVersion;
+module.exports = nodeVersion
