@@ -24,6 +24,6 @@
             "./node_modules/@types/"
         ]
     },
-    "include": ["src", "src/generate-pkg-webpack-plugin.ts", "utils"],
+    "include": ["src", "src/generate-pkg-webpack-plugin.ts", "utils", "test/index.js"],
     "exclude": ["dist", "node_modules", "libs"]
 }
