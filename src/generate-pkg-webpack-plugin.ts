@@ -1,49 +1,50 @@
 import fs  from 'fs'
+import os from 'os'
+import path from 'path'
 const cwd = process.cwd()
-import {getWebpackVersion} from "./get-webpack-version";
-
+// import {getWebpackVersion} from "./get-webpack-version";
 import { Compilation, Compiler, Stats } from 'webpack';
+
+import { buildTime, commitInfo } from "./get-info";
 export interface Options {
-  ouputFile?: string;
+  filename?: string;
 }
 
 class GeneratePkgJsonPlugin {
-  private version: number = parseInt(getWebpackVersion());
+  // private version: number = parseInt(getWebpackVersion());
   private options: Options;
-  constructor(options: Options = {}) {
+
+  constructor(options: Options = { filename: "package" }) {
     this.options = options;
   }
 
   apply(compiler: any) {
-    // 可以从编译器对象访问 webpack 模块实例
+    // 可以从编译器对象访问 webpcommitInfoack 模块实例
     // 并且可以保证 webpack 版本正确
     const { webpack } = compiler;
-    console.log(this.version);
-    // console.log(getWebpackVersion());
     const str = this.handlePkgJson();
+
+    if (!str) return;
 
     /** compiler.hooks.<hoonkName>.tap/tapAsync/tapPromise */
     compiler.hooks.compilation.tap(
       "GeneratePkgJsonPlugin",
       (compilation: Compilation) => {
+        const filename: string = `${this.options.filename}.json`;
+        if (!this.options.filename) throw new Error(
+          "[generate-pkg-webpack-plugin] filename不能为空字符串"
+        );
         // webpack5
         if (webpack) {
           // 获取 Compilation 后续会用到 Compilation 提供的 stage
           const { Compilation } = webpack;
           const { RawSource } = webpack.sources;
 
-          // webpack4静态资源生成方法
-          compilation.emitAsset(
-            `${this.options.ouputFile || "package"}.json`,
-            new RawSource(str)
-          );
+          compilation.emitAsset(filename, new RawSource(str));
 
           // webpack4
         } else {
-          // webpack5静态资源生成方法
-          (compilation as any).assets[
-            `${this.options.ouputFile || "package"}.json`
-          ] = {
+          (compilation as any).assets[filename] = {
             source: function () {
               return str;
             },
@@ -56,13 +57,21 @@ class GeneratePkgJsonPlugin {
     );
   }
 
-  handlePkgJson() {
-    const date = new Date().toLocaleString();
-    const pkgjson = fs.readFileSync(`${cwd}\\package.json`, "utf-8");
-    const data = JSON.parse(pkgjson);
-    data.buildTime = date;
+  private handlePkgJson() {
+    const rootPath: string = path.join(cwd, "package.json");
 
-    return JSON.stringify(data, null, 2);
+    try {
+      const pkgjson: string = fs.readFileSync(rootPath, "utf-8");
+      const data = JSON.parse(pkgjson);
+      data.buildTime = buildTime;
+      data.commitInfo = JSON.stringify(commitInfo);
+
+      return JSON.stringify(data, null, 2);
+    } catch (e) {
+      throw new Error(
+        "[generate-pkg-webpack-plugin] 无法获取根目录下package.json"
+      );
+    }
   }
 }
 

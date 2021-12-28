@@ -6,11 +6,8 @@ export const getWebpackVersion = () => {
     const { dir } = path.parse(webpackPath);
 
     const webpackPackageJson: any = readPkgUp.sync({ cwd: dir, normalize: false });
-    const version: string = webpackPackageJson.package.version
-        ? webpackPackageJson.package.version
-        : null;
+    const pkg = webpackPackageJson.package || webpackPackageJson.pkg;
+    const version: string = pkg.version ? pkg.version : null;
 
     return version;
 }
-
-

@@ -4,14 +4,6 @@
   </a>
 </div>
 
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![deps][deps]][deps-url]
-[![tests][tests]][tests-url]
-[![cover][cover]][cover-url]
-[![chat][chat]][chat-url]
-[![size][size]][size-url]
-
 # generate-pkg-webpack-plugin
 
 打包后在输出目录生成包描述文件，并记录打包时间
@@ -24,7 +16,7 @@ To begin, you'll need to install `generate-pkg-webpack-plugin`:
 $ npm install generate-pkg-webpack-plugin --save-dev
 ```
 
-Then add the plugin to your `webpack` config. For example:
+在生产环境下引入`generate-pkg-webpack-plugin`
 
 **webpack.config.js**
 
@@ -40,7 +32,7 @@ module.exports = {
 
 |                        Name                         |                   Type                    |                            Default                            | Description                                                                                                   |
 | :-------------------------------------------------: | :---------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------ |
-|                 **[`filename`]**                 | `{String}` |                          `package`                          | 生成文件名称
+|                 **[`filename`]**                 | `{String}` |                          `package`                          | 生成文件名称(预留配置，不建议修改)
 
 ### `filename`
 

@@ -1,13 +1,12 @@
 'use strict';
 
-const nodeVersion = require('./utils/node-version');
 const babel = {
     presets: [
         [
             '@babel/preset-env',
             {
                 targets: {
-                    node: nodeVersion,
+                    node: "12.0.0"
                 },
             },
         ],

@@ -1,6 +1,6 @@
 {
   "name": "generate-pkg-webpack-plugin",
-  "version": "1.1.0",
+  "version": "1.0.9",
   "description": "",
   "main": "libs/generate-pkg-webpack-plugin.js",
   "types": "libs/types/generate-pkg-webpack-plugin.d.ts",
@@ -13,7 +13,7 @@
     "build.test": "npm run build && npm run debug",
     "lint": "eslint --ext .js,.ts .",
     "lint.fix": "eslint --ext .js,.ts --fix .",
-    "rollup-build": "rollup -c",
+    "rollup-build": "rollup -c && npm run build.types",
     "pub": "npm run rollup-build && npm publish --registry=http://192.168.10.220:8085/nexus/repository/npm-southgis"
   },
   "files": [
@@ -54,5 +54,10 @@
   },
   "peerDependencies": {
     "webpack": ">=4.0.0 <6.0.0"
-  }
+  },
+  "dependencies": {
+    "shelljs": "^0.8.4"
+  },
+  "buildTime": "2021-12-28 10:27:48",
+  "commitInfo": "{\"commit\":\"91afca579cd8cff6bbbe4dd0f964031585d228a2\",\"commitUserName\":\"zongjian.li\",\"commitUserMail\":\"zongjian.li@southgis.com\",\"commitDate\":\"2021-12-24 18:04:37\"}"
 }
