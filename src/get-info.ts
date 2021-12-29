@@ -37,7 +37,7 @@ const commitUserName: Commit = execCMD("git show -s --format=%cn");
 
 const commitUserMail: Commit = execCMD("git show -s --format=%ce");
 
-const branch: Commit = execCMD("git show -s --format=%ce");
+const branch: Commit = execCMD(" git branch --show-current");
 
 const commitDate = (): Commit => {
   const d: Commit = execCMD(`git show -s --format=%cd`);

@@ -1,6 +1,6 @@
 {
   "name": "generate-pkg-webpack-plugin",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "",
   "main": "libs/generate-pkg-webpack-plugin.js",
   "types": "libs/types/generate-pkg-webpack-plugin.d.ts",
