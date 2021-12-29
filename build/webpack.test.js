@@ -6,8 +6,6 @@ module.exports = {
     filename: 'main.js'
   },
   plugins: [
-    new GeneratePkgPlugin({
-      filename: ''
-    })
+    new GeneratePkgPlugin()
   ]
 }

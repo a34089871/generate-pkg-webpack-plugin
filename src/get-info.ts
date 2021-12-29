@@ -1,4 +1,5 @@
-import child_process from "child_process";
+import { execSync } from "child_process";
+export type Commit = string | null
 
 const dateFormat = (d: Date = new Date()) => {
   if (d) {
@@ -20,30 +21,29 @@ const dateFormat = (d: Date = new Date()) => {
   }
 };
 
+const execCMD = (command: string): Commit => {
+  try {
+    return execSync(command).toString().trim();
+  } catch(e) {
+    return null
+  }
+}
+execCMD("git show -s --format=%H");
+
 // git 最后一次提交的 Head
-const commit: string = child_process
-  .execSync("git show -s --format=%H")
-  .toString()
-  .trim();
+const commit: Commit = execCMD("git show -s --format=%H");
 
-const commitUserName: string = child_process
-  .execSync("git show -s --format=%cn")
-  .toString()
-  .trim();
+const commitUserName: Commit = execCMD("git show -s --format=%cn");
 
-const commitUserMail: string = child_process
-  .execSync("git show -s --format=%ce")
-  .toString()
-  .trim();
+const commitUserMail: Commit = execCMD("git show -s --format=%ce");
 
-// const branch: string = child_process
-//   .execSync("git symbolic-ref --short HEAD")
-//   .toString()
-//   .trim();
+const branch: Commit = execCMD("git show -s --format=%ce");
 
-const commitDate: string = dateFormat(
-  new Date(child_process.execSync(`git show -s --format=%cd`).toString())
-);
+const commitDate = (): Commit => {
+  const d: Commit = execCMD(`git show -s --format=%cd`);
+
+  return d ? dateFormat(new Date(d)) : null;
+};
 
 // const buildUserName: string = child_process
 //   .execSync("git config user.name")
@@ -60,8 +60,8 @@ export const commitInfo = {
   commit,
   commitUserName,
   commitUserMail,
-  commitDate
-  // branch
+  commitDate: commitDate(),
+  branch
 };
 
 // export const buildInfo = {

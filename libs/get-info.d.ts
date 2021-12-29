@@ -1,7 +1,9 @@
+export declare type Commit = string | null;
 export declare const buildTime: string;
 export declare const commitInfo: {
-    commit: string;
-    commitUserName: string;
-    commitUserMail: string;
-    commitDate: string;
+    commit: Commit;
+    commitUserName: Commit;
+    commitUserMail: Commit;
+    commitDate: Commit;
+    branch: Commit;
 };
